@@ -43,7 +43,7 @@ fi
 if [ ! -d "$PACKAGE_DIR/$PROTOBUF_PATH" ]; then
 	svn co $PROTOBUF_URL $PACKAGE_DIR/$PROTOBUF_PATH
 	echo "### building Google Protocol Buffers ###"
-	cd $PACKAGE_DIR/$PROTOBUF_PATH && ./autogen.sh &&make ./configure && make -j8 -l4 && cd $PACKAGE_DIR
+	cd $PACKAGE_DIR/$PROTOBUF_PATH && ./autogen.sh && ./configure && make -j8 -l4 && cd $PACKAGE_DIR
 #todo: this might need a make install... :(
 fi
 
