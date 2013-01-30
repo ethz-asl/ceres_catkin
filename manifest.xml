@@ -12,7 +12,7 @@
 <depend package="roscpp"/>
 <rosdep name="eigen"/>
 
-<export><cpp cflags="`pkg-config --cflags eigen3` -I${prefix}/include" lflags="-L${prefix}/build/lib -glog -gflags -ceres"/></export>
+<export><cpp cflags="`pkg-config --cflags eigen3` -I${prefix}/include -I${prefix}/dependencies/glog/src -I${prefix}/dependencies/gflags/src" lflags="-L${prefix}/lib -L${prefix}/dependencies/gflags/.libs -L${prefix}/dependencies/glog/.libs -lglog -lgflags -lceres -llapack -lcamd -lamd -lccolamd -lcolamd -lcholmod -fopenmp -lpthread -lgomp -lm -lcxsparse -lprotobuf"/></export>
 
 </package>
 
