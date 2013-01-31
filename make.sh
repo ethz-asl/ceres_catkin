@@ -28,16 +28,16 @@ else
 	cd $PACKAGE_DIR/$CERES_PATH/ && git checkout $CERES_TAG && cd $PACKAGE_DIR 
 fi
 
-if [ ! -d "$PACKAGE_DIR/$GLOG_PATH" ]; then
-	svn co $GLOG_URL $PACKAGE_DIR/$GLOG_PATH
-	echo "### building Google log ###"
-	cd $PACKAGE_DIR/$GLOG_PATH && ./configure --with-pic && make -j8 -l4 && cd $PACKAGE_DIR #I couldn't link ceres against a non PIC version
-fi
-
 if [ ! -d "$PACKAGE_DIR/$GFLAGS_PATH" ]; then
 	svn co $GFLAGS_URL $PACKAGE_DIR/$GFLAGS_PATH
 	echo "### building Google flags ###"
 	cd $PACKAGE_DIR/$GFLAGS_PATH && ./configure --with-pic && make -j8 -l4 && cd $PACKAGE_DIR
+fi
+
+if [ ! -d "$PACKAGE_DIR/$GLOG_PATH" ]; then
+	svn co $GLOG_URL $PACKAGE_DIR/$GLOG_PATH
+	echo "### building Google log ###"
+	cd $PACKAGE_DIR/$GLOG_PATH && ./configure --with-pic --with-gflags=$PACKAGE_DIR/$GFLAGS_PATH && make -j8 -l4 && cd $PACKAGE_DIR #I couldn't link ceres against a non PIC version
 fi
 
 if [ ! -d "$PACKAGE_DIR/$PROTOBUF_PATH" ]; then
