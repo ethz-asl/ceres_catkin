@@ -9,7 +9,8 @@ echo "### downloading and unpacking ceres to" $PACKAGE_DIR "###"
 CERES_URL="https://ceres-solver.googlesource.com/ceres-solver"
 CERES_PATH="ceres_src"
 #CERES_TAG="a9f01baf28235b95696aedcbf918e9b1c3184fd6" #version 1.4
-CERES_TAG=6bcb8d9c304a3b218f8788018dfdfe368bb7d60c #version 1.5
+#CERES_TAG=6bcb8d9c304a3b218f8788018dfdfe368bb7d60c #version 1.5
+CERES_TAG=01fb8a3133b74112900361af4b7195118c0c9c9e #version 1.6rc2
 GLOG_URL="http://google-glog.googlecode.com/svn/trunk/ "
 GLOG_PATH="dependencies/glog"
 GFLAGS_URL="http://gflags.googlecode.com/svn/trunk/"
@@ -38,13 +39,13 @@ fi
 if [ ! -d "$PACKAGE_DIR/$GLOG_PATH" ]; then
 	svn co $GLOG_URL $PACKAGE_DIR/$GLOG_PATH
 	echo "### building Google log ###"
-	cd $PACKAGE_DIR/$GLOG_PATH && ./configure --with-pic --with-gflags=$PACKAGE_DIR/$GFLAGS_PATH && make -j8 -l4 && cd $PACKAGE_DIR #I couldn't link ceres against a non PIC version
+	cd $PACKAGE_DIR/$GLOG_PATH && ./configure --with-pic --with-gflags=$PACKAGE_DIR/$GFLAGS_PATH && make -j8 -l8 && cd $PACKAGE_DIR #I couldn't link ceres against a non PIC version
 fi
 
 if [ ! -d "$PACKAGE_DIR/$PROTOBUF_PATH" ]; then
 	svn co $PROTOBUF_URL $PACKAGE_DIR/$PROTOBUF_PATH
 	echo "### building Google Protocol Buffers ###"
-	cd $PACKAGE_DIR/$PROTOBUF_PATH && ./autogen.sh && ./configure && make -j8 -l4 && cd $PACKAGE_DIR
+	cd $PACKAGE_DIR/$PROTOBUF_PATH && ./autogen.sh && ./configure && make -j8 -l8 && cd $PACKAGE_DIR
 #todo: this might need a make install... :(
 fi
 
