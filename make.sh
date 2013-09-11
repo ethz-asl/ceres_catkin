@@ -11,7 +11,8 @@ CERES_PATH="ceres_src"
 #CERES_TAG="a9f01baf28235b95696aedcbf918e9b1c3184fd6" #version 1.4
 #CERES_TAG=6bcb8d9c304a3b218f8788018dfdfe368bb7d60c #version 1.5
 #CERES_TAG=01fb8a3133b74112900361af4b7195118c0c9c9e #version 1.6rc2
-CERES_TAG=f3e1267aa1f00e4a5b35d30de2d18b9aff7b2c05 # june 4th 2013
+#CERES_TAG=f3e1267aa1f00e4a5b35d30de2d18b9aff7b2c05 # june 4th 2013
+CERES_TAG=e948986669c83f7c2c4df0ae7a26440b3789ec7d #version 1.7
 GLOG_URL="http://google-glog.googlecode.com/svn/trunk/ "
 GLOG_PATH="dependencies/glog"
 GFLAGS_URL="http://gflags.googlecode.com/svn/trunk/"
@@ -58,7 +59,7 @@ sed -i 's/-Werror/-Wall/g' $PACKAGE_DIR/$CERES_PATH/CMakeLists.txt
 
 mkdir -p $PACKAGE_DIR/build && cd $PACKAGE_DIR/build
 
-cmake -DGFLAGS_LIB=$PACKAGE_DIR/$GFLAGS_PATH -DGFLAGS_INCLUDE=$PACKAGE_DIR/$GFLAGS_PATH/src -DGFLAGS_LIB=$PACKAGE_DIR/$GFLAGS_PATH/.libs/libgflags.a -DGLOG_INCLUDE=$PACKAGE_DIR/$GLOG_PATH/src -DGLOG_LIB=$PACKAGE_DIR/$GLOG_PATH/.libs/libglog.a $PACKAGE_DIR/$CERES_PATH/ && make -j8 -l4 -I$PACKAGE_DIR/$GLOG_PATH/src
+cmake -DGFLAGS_LIB=$PACKAGE_DIR/$GFLAGS_PATH -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS_INCLUDE=$PACKAGE_DIR/$GFLAGS_PATH/src -DGFLAGS_LIB=$PACKAGE_DIR/$GFLAGS_PATH/.libs/libgflags.a -DGLOG_INCLUDE=$PACKAGE_DIR/$GLOG_PATH/src -DGLOG_LIB=$PACKAGE_DIR/$GLOG_PATH/.libs/libglog.a $PACKAGE_DIR/$CERES_PATH/ && make -j8 -l4 -I$PACKAGE_DIR/$GLOG_PATH/src
 
 rm -rf $PACKAGE_DIR/bin
 rm -rf $PACKAGE_DIR/lib
