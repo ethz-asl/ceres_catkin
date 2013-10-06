@@ -14,7 +14,7 @@
 
 <export>
   <cpp cflags="`pkg-config --cflags eigen3` -I${prefix}/ceres_src/include -I${prefix}/dependencies/glog/src -I${prefix}/dependencies/gflags/src" 
-       lflags="-L${prefix}/lib -L${prefix}/dependencies/gflags/.libs -L${prefix}/dependencies/glog/.libs  -lgflags -lceres -lglog -llapack -lblas -lcamd -lamd -lccolamd -lcolamd -lcholmod -fopenmp -lpthread -lgomp -lm -lcxsparse -lprotobuf"/>
+       lflags="-L${prefix}/lib -L${prefix}/dependencies/gflags/.libs -L${prefix}/dependencies/glog/.libs  -lgflags -lceres -lglog -llapack -lblas -lcamd -lamd -lccolamd -lcolamd -lcholmod -fopenmp -lpthread -lgomp -lm -lcxsparse -lprotobuf -lspqr"/>
 </export>
 
 </package>
