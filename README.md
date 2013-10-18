@@ -8,3 +8,11 @@ sudo add-apt-repository ppa:jmaye/ethz
 sudo apt-get update
 sudo apt-get install libsuitesparse-dev
 ```
+
+### UBUNTU 13.04
+same as above except for the last step
+```
+sudo aptitude install libsuitesparse-dev=1:3.4.0-2ubuntu5~raring
+```
+do NOT accept the first solution aptitude will propose to you!
+take the second solution
