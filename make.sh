@@ -65,7 +65,7 @@ mkdir -p $PACKAGE_DIR/build && cd $PACKAGE_DIR/build
 cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON -DGFLAGS_LIBRARY=$PACKAGE_DIR/$GFLAGS_PATH/.libs/libgflags.a \
       -DGFLAGS_INCLUDE_DIR=$PACKAGE_DIR/$GFLAGS_PATH/src -DGLOG_INCLUDE_DIR=$PACKAGE_DIR/$GLOG_PATH/src \
       -DGLOG_LIBRARY=$PACKAGE_DIR/$GLOG_PATH/.libs/libglog.a $PACKAGE_DIR/$CERES_PATH/ && \
-      make -j8 -l4 -I$PACKAGE_DIR/$GLOG_PATH/src
+      make -j8 -l4
 
 rm -rf $PACKAGE_DIR/bin
 rm -rf $PACKAGE_DIR/lib
