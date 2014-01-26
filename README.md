@@ -1,7 +1,7 @@
 ceres
 =====
 
-This repository contains ros-package files and a download/make script to checkout and build version 1.7 of ceres and its dependencies.
+This repository contains ros-package files and a download/make script to checkout and build ceres and its dependencies.
 In order to use the ceres covariance computation, you must use an -fPIC version of suitesparse. Check out Jérôme's build with
 ```
 sudo add-apt-repository ppa:jmaye/ethz
