@@ -1,0 +1,25 @@
+<package>
+  <name>ceres</name>
+  <version>1.8.0</version>
+  <description>ceres</description>
+  <maintainer email="sameeragarwal@google.com">Sameer Agarwal</maintainer>
+
+  <license>New BSD</license>
+
+  <url type="website">https://code.google.com/p/ceres-solver/</url>
+
+  <author>Sameer Agarwal</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>atlas</build_depend>
+  <build_depend>blas</build_depend>
+  <build_depend>gfortran</build_depend>
+  <build_depend>suitesparse</build_depend>
+  
+  <run_depend>atlas</run_depend>
+  <run_depend>blas</run_depend>
+  <run_depend>gfortran</run_depend>
+  <run_depend>suitesparse</run_depend>
+
+</package>
