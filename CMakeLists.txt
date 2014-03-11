@@ -18,9 +18,9 @@ catkin_package(
 
 # HACK, HACK, HACK. Force cmake to first build the catkin dep suitesparse before
 # building the external lib.
-#add_library(dependency_hack src/dependency_hack.cc)
-#target_link_libraries(dependency_hack ${catkin_LIBRARIES})
-#add_dependencies(dependency_hack ${catkin_EXPORTED_TARGETS})
+add_library(dependency_hack src/dependency_hack.cc)
+target_link_libraries(dependency_hack ${catkin_LIBRARIES})
+add_dependencies(dependency_hack ${catkin_EXPORTED_TARGETS})
 
 set(CERES_URL https://ceres-solver.googlesource.com/ceres-solver)
 set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
