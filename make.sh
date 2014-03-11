@@ -42,7 +42,7 @@ if [ ! -d "$PACKAGE_DIR/$GLOG_PATH" ]; then
 	svn co $GLOG_URL $PACKAGE_DIR/$GLOG_PATH
 	echo "### Building Google log ###"
 	cd $PACKAGE_DIR/$GLOG_PATH && ./configure --with-pic --with-gflags=$PACKAGE_DIR/$GFLAGS_PATH && \
-           make -j8 && cd $PACKAGE_DIR #I couldn't link ceres against a non PIC version
+           make -j8 && cd $PACKAGE_DIR
 fi
 
 if [ ! -d "$PACKAGE_DIR/$PROTOBUF_PATH" ]; then
@@ -54,8 +54,11 @@ fi
 echo "### Building Google ceres ###"
 
 echo "### Patching ceres cmake ###"
-#remove -Werror from cmake lists as clang outputs warnings for unused include paths
+# Remove -Werror from cmake lists as clang outputs warnings for unused include paths.
 sed -i 's/-Werror/-Wall/g' $PACKAGE_DIR/$CERES_PATH/CMakeLists.txt
+# Add gflags to linker list for ceres.
+sed -i 's/SET(CERES_LIBRARY_DEPENDENCIES ${GLOG_LIBRARIES})/SET(CERES_LIBRARY_DEPENDENCIES ${GLOG_LIBRARIES} ${GFLAGS_LIBRARIES})/g' \
+       $PACKAGE_DIR/$CERES_PATH/examples/CMakeLists.txt
 
 mkdir -p $PACKAGE_DIR/build && cd $PACKAGE_DIR/build
 
@@ -63,6 +66,6 @@ cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON -DGFLAGS_LIBRARY=$PACKAGE_DIR/$GFLAGS_
       -DGFLAGS_INCLUDE_DIR=$PACKAGE_DIR/$GFLAGS_PATH/src/ -DGLOG_INCLUDE_DIR=$PACKAGE_DIR/$GLOG_PATH/src/ \
       -DGLOG_LIBRARY=$PACKAGE_DIR/$GLOG_PATH/.libs/libglog.a -DCMAKE_INSTALL_PREFIX=$INSTALL_SPACE \
       -DBUILD_SHARED_LIBS=ON -DBUILD_DOCUMENTATION=OFF -DCMAKE_VERBOSE_MAKEFILE=ON \
-      $PACKAGE_DIR/$CERES_PATH/ #&& make -j8
+      $PACKAGE_DIR/$CERES_PATH/ && make -j8
 
 
