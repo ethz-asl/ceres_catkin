@@ -26,7 +26,7 @@ set(CERES_URL https://ceres-solver.googlesource.com/ceres-solver)
 set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
 
 ExternalProject_Add(ceres_src
-  DEPENDS ${catkin_EXPORTED_TARGETS}
+  DEPENDS dependency_hack
   DOWNLOAD_COMMAND ""
   CONFIGURE_COMMAND cp ${PROJECT_SOURCE_DIR}/make.sh ./
   BUILD_COMMAND sh make.sh ${CATKIN_DEVEL_PREFIX}
