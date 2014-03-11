@@ -57,8 +57,7 @@ echo "### Patching ceres cmake ###"
 # Remove -Werror from cmake lists as clang outputs warnings for unused include paths.
 sed -i 's/-Werror/-Wall/g' $PACKAGE_DIR/$CERES_PATH/CMakeLists.txt
 # Add gflags to linker list for ceres.
-sed -i 's/SET(CERES_LIBRARY_DEPENDENCIES ${GLOG_LIBRARIES})/SET(CERES_LIBRARY_DEPENDENCIES ${GLOG_LIBRARIES} ${GFLAGS_LIBRARIES})/g' \
-       $PACKAGE_DIR/$CERES_PATH/examples/CMakeLists.txt
+sed -i 's/SET(CERES_LIBRARY_DEPENDENCIES ${GLOG_LIBRARIES})/SET(CERES_LIBRARY_DEPENDENCIES ${GLOG_LIBRARIES} ${GFLAGS_LIBRARIES})/g' $PACKAGE_DIR/$CERES_PATH/internal/ceres/CMakeLists.txt
 
 mkdir -p $PACKAGE_DIR/build && cd $PACKAGE_DIR/build
 
