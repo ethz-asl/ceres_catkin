@@ -10,7 +10,7 @@ include(ExternalProject)
 set(VERSION 1.8.0)
 
 catkin_package(
-    DEPENDS
+    DEPENDS ${catkin_EXPORTED_TARGETS}
     CATKIN_DEPENDS suitesparse
     INCLUDE_DIRS 
     LIBRARIES ceres
