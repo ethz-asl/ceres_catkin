@@ -9,13 +9,6 @@ include(ExternalProject)
 
 set(VERSION 1.8.0)
 
-catkin_package(
-    DEPENDS ${catkin_EXPORTED_TARGETS}
-    CATKIN_DEPENDS suitesparse
-    INCLUDE_DIRS 
-    LIBRARIES ceres
-)
-
 # HACK, HACK, HACK. Force cmake to first build the catkin dep suitesparse before
 # building the external lib.
 add_library(dependency_hack src/dependency_hack.cc)
@@ -30,7 +23,14 @@ ExternalProject_Add(ceres_src
   DOWNLOAD_COMMAND ""
   CONFIGURE_COMMAND cp ${PROJECT_SOURCE_DIR}/make.sh ./
   BUILD_COMMAND sh make.sh ${CATKIN_DEVEL_PREFIX}
-  INSTALL_COMMAND cd build && make -j8 -l8 install
+  INSTALL_COMMAND ""
+)
+
+catkin_package(
+    DEPENDS ${catkin_EXPORTED_TARGETS}
+    CATKIN_DEPENDS suitesparse
+    #INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/ceres_src/include
+    LIBRARIES ceres
 )
 
 install(DIRECTORY include
