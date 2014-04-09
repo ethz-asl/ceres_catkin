@@ -27,7 +27,7 @@ ExternalProject_Add(ceres_src
 )
 
 catkin_package(
-    DEPENDS ${catkin_EXPORTED_TARGETS}
+    DEPENDS ${catkin_EXPORTED_TARGETS} ceres_src
     CATKIN_DEPENDS suitesparse
     INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
     LIBRARIES ceres
