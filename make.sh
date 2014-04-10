@@ -22,10 +22,6 @@ GFLAGS_PATH="dependencies/gflags"
 PROTOBUF_URL="http://protobuf.googlecode.com/svn/trunk/"
 PROTOBUF_PATH="dependencies/protobuf"
 
-echo "### Installing gflags and glog using apt-get ###"
-sudo apt-get install libgflags-dev -y
-sudo apt-get install libgoogle-glog-dev -y
-
 #create directory for deps
 mkdir -p $PACKAGE_DIR/dependencies
 
