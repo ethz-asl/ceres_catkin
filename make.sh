@@ -22,6 +22,10 @@ GFLAGS_PATH="dependencies/gflags"
 PROTOBUF_URL="http://protobuf.googlecode.com/svn/trunk/"
 PROTOBUF_PATH="dependencies/protobuf"
 
+echo "### Installing gflags and glog using apt-get ###"
+sudo apt-get install libgflags-dev -y
+sudo apt-get install libgoogle-glog-dev -y
+
 #create directory for deps
 mkdir -p $PACKAGE_DIR/dependencies
 
@@ -32,19 +36,6 @@ if [ ! -d "$PACKAGE_DIR/$CERES_PATH" ]; then
 else
 	cd $PACKAGE_DIR/$CERES_PATH/ && git fetch && cd $PACKAGE_DIR
 	cd $PACKAGE_DIR/$CERES_PATH/ && git checkout $CERES_TAG && cd $PACKAGE_DIR 
-fi
-
-if [ ! -d "$PACKAGE_DIR/$GFLAGS_PATH" ]; then
-	svn co $GFLAGS_URL $PACKAGE_DIR/$GFLAGS_PATH
-	echo "### building Google flags ###"
-	cd $PACKAGE_DIR/$GFLAGS_PATH && ./configure --with-pic && make -j8 -l4 && cd $PACKAGE_DIR
-fi
-
-if [ ! -d "$PACKAGE_DIR/$GLOG_PATH" ]; then
-	svn co $GLOG_URL $PACKAGE_DIR/$GLOG_PATH
-	echo "### building Google log ###"
-	cd $PACKAGE_DIR/$GLOG_PATH && ./configure --with-pic --with-gflags=$PACKAGE_DIR/$GFLAGS_PATH && \
-           make -j8 -l8 && cd $PACKAGE_DIR #I couldn't link ceres against a non PIC version
 fi
 
 if [ ! -d "$PACKAGE_DIR/$PROTOBUF_PATH" ]; then
@@ -62,9 +53,7 @@ sed -i 's/-Werror/-Wall/g' $PACKAGE_DIR/$CERES_PATH/CMakeLists.txt
 
 mkdir -p $PACKAGE_DIR/build && cd $PACKAGE_DIR/build
 
-cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON -DGFLAGS_LIBRARY=$PACKAGE_DIR/$GFLAGS_PATH/.libs/libgflags.a \
-      -DGFLAGS_INCLUDE_DIR=$PACKAGE_DIR/$GFLAGS_PATH/src -DGLOG_INCLUDE_DIR=$PACKAGE_DIR/$GLOG_PATH/src \
-      -DGLOG_LIBRARY=$PACKAGE_DIR/$GLOG_PATH/.libs/libglog.a $PACKAGE_DIR/$CERES_PATH/ && \
+cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON $PACKAGE_DIR/$CERES_PATH/ && \
       make -j8 -l4
 
 rm -rf $PACKAGE_DIR/bin
