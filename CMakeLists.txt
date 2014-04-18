@@ -18,7 +18,9 @@ add_dependencies(dependency_hack ${catkin_EXPORTED_TARGETS})
 set(CERES_URL https://ceres-solver.googlesource.com/ceres-solver)
 set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
 
-find_package(suitesparse REQUIRED)
+# The configure step fails at catkin_package() if this directory
+# doesn't exist yet. Create it at configure time!
+file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 ExternalProject_Add(ceres_src
   #DEPENDS dependency_hack  # This is broken, so we hope that suitesparse is build by the time ceres searches for it.
