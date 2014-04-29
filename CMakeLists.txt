@@ -18,11 +18,13 @@ add_dependencies(dependency_hack ${catkin_EXPORTED_TARGETS})
 set(CERES_URL https://ceres-solver.googlesource.com/ceres-solver)
 set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
 
+find_package(suitesparse REQUIRED)
+
 ExternalProject_Add(ceres_src
   #DEPENDS dependency_hack  # This is broken, so we hope that suitesparse is build by the time ceres searches for it.
   DOWNLOAD_COMMAND ""
   CONFIGURE_COMMAND cp ${PROJECT_SOURCE_DIR}/make.sh ./
-  BUILD_COMMAND sh make.sh ${CATKIN_DEVEL_PREFIX}
+  BUILD_COMMAND sh make.sh ${CATKIN_DEVEL_PREFIX} ${suitesparse_DEVEL_PREFIX}/include/suitesparse ${suitesparse_DEVEL_PREFIX}/lib
   INSTALL_COMMAND ""
 )
 
