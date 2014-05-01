@@ -40,7 +40,7 @@ fi
 if [ ! -d "$PACKAGE_DIR/$GFLAGS_PATH" ]; then
 	svn co $GFLAGS_URL $PACKAGE_DIR/$GFLAGS_PATH
 	echo "### Building Google flags ###"
-	cd $PACKAGE_DIR/$GFLAGS_PATH && ./configure --with-pic && make -j8 && cd $PACKAGE_DIR
+	cd $PACKAGE_DIR/$GFLAGS_PATH && ./configure --with-pic GFLAGS_NAMESPACE=gflags && make -j8 && cd $PACKAGE_DIR
 fi
 
 if [ ! -d "$PACKAGE_DIR/$GLOG_PATH" ]; then
