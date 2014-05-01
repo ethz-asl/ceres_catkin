@@ -34,4 +34,4 @@ add_dependencies(dependency_hack ${catkin_EXPORTED_TARGETS} ceres_src)
 
 cs_install()
 
-cs_export()
+cs_export(CFG_EXTRAS ${PROJECT_SOURCE_DIR}/cmake/ceres-extras.cmake.in)
