@@ -30,3 +30,8 @@ ExternalProject_Add(ceres_src
 cs_add_library(dependency_hack src/dependency_hack.cc)
 target_link_libraries(dependency_hack ${catkin_LIBRARIES})
 add_dependencies(dependency_hack ${catkin_EXPORTED_TARGETS} ceres_src)
+
+
+cs_install()
+
+cs_export()
