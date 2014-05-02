@@ -8,11 +8,6 @@ include_directories(${Eigen_INCLUDE_DIRS})
 
 include(ExternalProject)
 
-
-# HACK, HACK, HACK. Force cmake to first build the catkin dep suitesparse before
-# building the external lib.
-cs_add_library(dependency_hack_suitesparse src/dependency_hack.cc)
-
 set(VERSION 1.8.0)
 set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
 
@@ -43,17 +38,13 @@ ExternalProject_Add(glog
 )
 
 ExternalProject_Add(ceres_src
-  DEPENDS gflags glog protobuf dependency_hack_suitesparse
+  DEPENDS gflags glog protobuf
   DOWNLOAD_COMMAND git clone https://ceres-solver.googlesource.com/ceres-solver ceres && cd ceres && git checkout ${CERES_TAG}
   PATCH_COMMAND cd ../ceres && ${PROJECT_SOURCE_DIR}/patch.sh
   CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON -DGFLAGS_LIBRARY=${CATKIN_DEVEL_PREFIX}/lib/libgflags.a -DGFLAGS_INCLUDE_DIR=${CATKIN_DEVEL_PREFIX}/include/ -DGLOG_INCLUDE_DIR=${CATKIN_DEVEL_PREFIX}/include -DGLOG_LIBRARY=${CATKIN_DEVEL_PREFIX}/lib/libglog.a -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON -DBUILD_DOCUMENTATION=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DSUITESPARSE_INCLUDE_DIR_HINTS=${CATKIN_DEVEL_PREFIX}/include/suitesparse -DSUITESPARSE_LIBRARY_DIR_HINTS=${CATKIN_DEVEL_PREFIX} ../ceres
   BUILD_COMMAND make -j8
   INSTALL_COMMAND make install -j8
 )
-
-# HACK, HACK, HACK. Force cmake to finish ceres and then declare this package as finished.
-cs_add_library(dependency_hack_ceres src/dependency_hack.cc)
-add_dependencies(dependency_hack_ceres ceres_src)
 
 cs_install()
 
