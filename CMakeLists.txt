@@ -51,4 +51,4 @@ add_dependencies(dependency_hack ceres)
 
 cs_install()
 
-cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX})
+cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include)
