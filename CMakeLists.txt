@@ -48,5 +48,4 @@ ExternalProject_Add(ceres_src
 
 cs_install()
 
-cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}
-          LIBRARIES ceres)
+cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX})
