@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ceres)
+project(ceres_catkin)
 
 find_package(catkin_simple REQUIRED)
 catkin_simple()
@@ -37,7 +37,7 @@ ExternalProject_Add(glog
   INSTALL_COMMAND cd ../glog && make install -j8
 )
 
-ExternalProject_Add(ceres_src
+ExternalProject_Add(ceres
   DEPENDS gflags glog protobuf
   DOWNLOAD_COMMAND git clone https://ceres-solver.googlesource.com/ceres-solver ceres && cd ceres && git checkout ${CERES_TAG}
   PATCH_COMMAND cd ../ceres && ${PROJECT_SOURCE_DIR}/patch.sh
@@ -47,7 +47,7 @@ ExternalProject_Add(ceres_src
 )
 
 cs_add_library(dependency_hack src/dependency_hack.cc)
-add_dependencies(dependency_hack ceres_src)
+add_dependencies(dependency_hack ceres)
 
 cs_install()
 

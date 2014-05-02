@@ -1,7 +1,7 @@
 <package>
-  <name>ceres</name>
+  <name>ceres_catkin</name>
   <version>1.8.0</version>
-  <description>ceres</description>
+  <description>ceres_catkin</description>
   <maintainer email="sameeragarwal@google.com">Sameer Agarwal</maintainer>
 
   <license>New BSD</license>
