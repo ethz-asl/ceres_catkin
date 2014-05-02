@@ -46,6 +46,9 @@ ExternalProject_Add(ceres_src
   INSTALL_COMMAND make install -j8
 )
 
+cs_add_library(dependency_hack src/dependency_hack.cc)
+add_dependencies(dependency_hack ceres_src)
+
 cs_install()
 
 cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX})
