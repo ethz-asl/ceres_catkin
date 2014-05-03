@@ -47,10 +47,8 @@ ExternalProject_Add(ceres_src
   INSTALL_COMMAND make install -j8
 )
 
-add_library(ceres STATIC IMPORTED)
-set_property(TARGET ceres PROPERTY IMPORTED_LOCATION ${CATKIN_DEVEL_PREFIX}/lib/libceres.so)
 cs_add_library(dependency_hack src/dependency_hack.cc)
-add_dependencies(dependency_hack ceres)
+add_dependencies(dependency_hack ceres_src)
 target_link_libraries(dependency_hack ceres)
 
 cs_install()
