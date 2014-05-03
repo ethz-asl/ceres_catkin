@@ -50,7 +50,7 @@ ExternalProject_Add(ceres_src
 cs_add_library(dependency_hack src/dependency_hack.cc)
 link_directories(${CATKIN_DEVEL_PREFIX}/lib)
 add_dependencies(dependency_hack ceres_src)
-target_link_libraries(dependency_hack ceres)
+target_link_libraries(dependency_hack ${CATKIN_DEVEL_PREFIX}/lib/libceres.so)
 
 cs_install()
 
