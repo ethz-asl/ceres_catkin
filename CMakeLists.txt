@@ -37,18 +37,21 @@ ExternalProject_Add(glog
   INSTALL_COMMAND cd ../glog && make install -j8
 )
 
-ExternalProject_Add(ceres
+ExternalProject_Add(ceres_src
   DEPENDS gflags glog protobuf
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
-  PATCH_COMMAND cd ../ceres && ${PROJECT_SOURCE_DIR}/patch.sh
-  CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON -DGFLAGS_LIBRARY=${CATKIN_DEVEL_PREFIX}/lib/libgflags.a -DGFLAGS_INCLUDE_DIR=${CATKIN_DEVEL_PREFIX}/include/ -DGLOG_INCLUDE_DIR=${CATKIN_DEVEL_PREFIX}/include -DGLOG_LIBRARY=${CATKIN_DEVEL_PREFIX}/lib/libglog.a -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON -DBUILD_DOCUMENTATION=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DSUITESPARSE_INCLUDE_DIR_HINTS=${CATKIN_DEVEL_PREFIX}/include/suitesparse -DSUITESPARSE_LIBRARY_DIR_HINTS=${CATKIN_DEVEL_PREFIX} ../ceres
+  PATCH_COMMAND cd ../ceres_src && ${PROJECT_SOURCE_DIR}/patch.sh
+  CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON -DGFLAGS_LIBRARY=${CATKIN_DEVEL_PREFIX}/lib/libgflags.a -DGFLAGS_INCLUDE_DIR=${CATKIN_DEVEL_PREFIX}/include/ -DGLOG_INCLUDE_DIR=${CATKIN_DEVEL_PREFIX}/include -DGLOG_LIBRARY=${CATKIN_DEVEL_PREFIX}/lib/libglog.a -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON -DBUILD_DOCUMENTATION=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -DSUITESPARSE_INCLUDE_DIR_HINTS=${CATKIN_DEVEL_PREFIX}/include/suitesparse -DSUITESPARSE_LIBRARY_DIR_HINTS=${CATKIN_DEVEL_PREFIX} ../ceres_src
   BUILD_COMMAND make -j8
   INSTALL_COMMAND make install -j8
 )
 
+add_library(ceres STATIC IMPORTED)
+set_property(TARGET ceres PROPERTY IMPORTED_LOCATION ${CATKIN_DEVEL_PREFIX}/lib/libceres.so)
 cs_add_library(dependency_hack src/dependency_hack.cc)
 add_dependencies(dependency_hack ceres)
+target_link_libraries(dependency_hack ceres)
 
 cs_install()
 
