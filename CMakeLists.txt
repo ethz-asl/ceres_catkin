@@ -15,27 +15,6 @@ set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
 # doesn't exist yet. Create it at configure time!
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
-#ExternalProject_Add(protobuf
-#  SVN_REPOSITORY http://protobuf.googlecode.com/svn/trunk/
-#  CONFIGURE_COMMAND cd ../protobuf && ./autogen.sh && ./configure --with-pic --prefix=${CATKIN_DEVEL_PREFIX}
-#  BUILD_COMMAND cd ../protobuf && make -j8
-#  INSTALL_COMMAND cd ../protobuf && make install -j8
-#)
-
-#ExternalProject_Add(gflags
-#  SVN_REPOSITORY http://gflags.googlecode.com/svn/trunk/
-#  CONFIGURE_COMMAND cd ../gflags && ./autogen.sh && ./configure --with-pic GFLAGS_NAMESPACE=gflags --prefix=${CATKIN_DEVEL_PREFIX}
-#  BUILD_COMMAND cd ../gflags && make -j8
-#  INSTALL_COMMAND cd ../gflags && make install -j8
-#)
-
-#ExternalProject_Add(glog
-#  DEPENDS gflags
-#  SVN_REPOSITORY http://google-glog.googlecode.com/svn/trunk/
-#  CONFIGURE_COMMAND cd ../glog && ./configure --with-pic --with-gflags=${CATKIN_DEVEL_PREFIX} --prefix=${CATKIN_DEVEL_PREFIX}
-#  BUILD_COMMAND cd ../glog && make -j8
-#  INSTALL_COMMAND cd ../glog && make install -j8
-#)
 
 ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
@@ -47,10 +26,10 @@ ExternalProject_Add(ceres_src
 )
 
 link_directories(${CATKIN_DEVEL_PREFIX}/lib)
-cs_add_library(dependency_hack src/dependency_hack.cc)
-add_dependencies(dependency_hack ceres_src)
+cs_add_library(dependency_tracker src/dependency_tracker.cc)
+add_dependencies(dependency_tracker ceres_src)
 
-target_link_libraries(dependency_hack ceres)
+target_link_libraries(dependency_tracker ceres)
 
 cs_install()
 
