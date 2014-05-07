@@ -46,16 +46,11 @@ ExternalProject_Add(ceres_src
   INSTALL_COMMAND make install -j8
 )
 
-cs_add_library(dependency_hack src/dependency_hack.cc)
 link_directories(${CATKIN_DEVEL_PREFIX}/lib)
+cs_add_library(dependency_hack src/dependency_hack.cc)
 add_dependencies(dependency_hack ceres_src)
 
-set(SO_EXT .so)
-if(APPLE)
-  set(SO_EXT .dylib)
-endif()
-
-target_link_libraries(dependency_hack ${CATKIN_DEVEL_PREFIX}/lib/libceres${SO_EXT})
+target_link_libraries(dependency_hack ceres)
 
 cs_install()
 
