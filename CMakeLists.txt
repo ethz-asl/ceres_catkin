@@ -38,7 +38,6 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 #)
 
 ExternalProject_Add(ceres_src
-  DEPENDS gflags glog protobuf
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
   PATCH_COMMAND cd ../ceres_src && ${PROJECT_SOURCE_DIR}/patch.sh
@@ -50,7 +49,13 @@ ExternalProject_Add(ceres_src
 cs_add_library(dependency_hack src/dependency_hack.cc)
 link_directories(${CATKIN_DEVEL_PREFIX}/lib)
 add_dependencies(dependency_hack ceres_src)
-target_link_libraries(dependency_hack ${CATKIN_DEVEL_PREFIX}/lib/libceres.so)
+
+set(SO_EXT .so)
+if(APPLE)
+  set(SO_EXT .dylib)
+endif()
+
+target_link_libraries(dependency_hack ${CATKIN_DEVEL_PREFIX}/lib/libceres${SO_EXT})
 
 cs_install()
 
