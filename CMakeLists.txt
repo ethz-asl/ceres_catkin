@@ -34,11 +34,10 @@ ExternalProject_Add(ceres_src
   INSTALL_COMMAND make install -j8
 )
 
-link_directories(${CATKIN_DEVEL_PREFIX}/lib)
 cs_add_library(dependency_tracker src/dependency_tracker.cc)
 add_dependencies(dependency_tracker ceres_src)
-
-target_link_libraries(dependency_tracker ceres)
+target_link_libraries(dependency_tracker
+  ${CATKIN_DEVEL_PREFIX}/lib/libceres${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 cs_install()
 
