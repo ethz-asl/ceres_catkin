@@ -19,6 +19,5 @@
   <build_depend>gfortran</build_depend>
   <build_depend>gflags_catkin</build_depend>
   <build_depend>glog_catkin</build_depend>
-  <build_depend>protobuf_catkin</build_depend>
   <build_depend>suitesparse</build_depend>
 </package>

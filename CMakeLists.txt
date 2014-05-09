@@ -15,7 +15,6 @@ set(CERES_TAG 4d52ef5457ccc23fe04f75b0f4451ebb1e852a27) #version 1.8
 # doesn't exist yet. Create it at configure time!
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
-
 ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
@@ -33,10 +32,11 @@ ExternalProject_Add(ceres_src
   BUILD_COMMAND make -j8
   INSTALL_COMMAND make install -j8
 )
+add_dependencies(ceres_src glog_catkin gflags_catkin suitesparse)
 
-cs_add_library(dependency_tracker src/dependency_tracker.cc)
-add_dependencies(dependency_tracker ceres_src)
-target_link_libraries(dependency_tracker
+cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
+add_dependencies(${PROJECT_NAME} ceres_src)
+target_link_libraries(${PROJECT_NAME}
   ${CATKIN_DEVEL_PREFIX}/lib/libceres${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 cs_install()
