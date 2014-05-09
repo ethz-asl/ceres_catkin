@@ -17,6 +17,8 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 
 
 ExternalProject_Add(ceres_src
+  DEPENDS glog_catkin_dependency_tracker gflags_catkin_dependency_tracker 
+    suitesparse_export_hack
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
   UPDATE_COMMAND ""
