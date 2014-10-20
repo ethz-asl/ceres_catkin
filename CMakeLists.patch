@@ -1,0 +1,32 @@
+--- CMakeLists.txt	2014-10-19 23:55:29.000000000 +0200
++++ CMakeLists_patched.txt	2014-10-20 00:08:41.000000000 +0200
+@@ -399,12 +399,6 @@
+ ENDIF (NOT CUSTOM_BLAS)
+ 
+ IF (OPENMP)
+-  # Clang does not (yet) support OpenMP.
+-  IF (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+-    UPDATE_CACHE_VARIABLE(OPENMP OFF)
+-    MESSAGE("-- Compiler is Clang, disabling OpenMP.")
+-    LIST(APPEND CERES_COMPILE_OPTIONS CERES_NO_THREADS)
+-  ELSE (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+     # Find quietly s/t as we can continue without OpenMP if it is not found.
+     FIND_PACKAGE(OpenMP QUIET)
+     IF (OPENMP_FOUND)
+@@ -423,7 +417,6 @@
+       UPDATE_CACHE_VARIABLE(OPENMP OFF)
+       LIST(APPEND CERES_COMPILE_OPTIONS CERES_NO_THREADS)
+     ENDIF (OPENMP_FOUND)
+-  ENDIF (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+ ELSE (OPENMP)
+   MESSAGE("-- Building without OpenMP (disabling multithreading).")
+   LIST(APPEND CERES_COMPILE_OPTIONS CERES_NO_THREADS)
+@@ -640,7 +633,7 @@
+ IF (UNIX)
+   # GCC is not strict enough by default, so enable most of the warnings.
+   SET(CMAKE_CXX_FLAGS
+-    "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers")
++    "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-missing-field-initializers")
+ ENDIF (UNIX)
+ 
+ # Use a larger inlining threshold for Clang, since it hobbles Eigen,
