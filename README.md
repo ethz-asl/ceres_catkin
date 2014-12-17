@@ -8,6 +8,7 @@ In order to use the ceres covariance computation, you must use an PIC version of
   * https://github.com/ethz-asl/suitesparse
   * https://github.com/ethz-asl/glog_catkin
   * https://github.com/ethz-asl/gflags_catkin
+  * https://github.com/ethz-asl/catkin_simple
 
 
 [![Build Status](http://129.132.38.183:8080/job/ceres/badge/icon)](http://129.132.38.183:8080/job/ceres/)
