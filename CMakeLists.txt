@@ -26,7 +26,7 @@ ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
   UPDATE_COMMAND ""
-  PATCH_COMMAND cd ../ceres_src/ && patch -N CMakeLists.txt ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.patch && patch ${GOMP_PATCH} -N internal/ceres/CMakeLists.txt ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists_internal.patch
+  PATCH_COMMAND cd ../ceres_src/ && patch -N CMakeLists.txt ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.patch && patch ${GOMP_PATCH} -N internal/ceres/CMakeLists.txt ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists_internal.patch && patch -N include/ceres/internal/numeric_diff.h ${CMAKE_CURRENT_SOURCE_DIR}/numeric_diff.patch
   CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON 
     -DGFLAGS_LIBRARY=${gflags_catkin_LIBRARIES}
     -DGFLAGS_INCLUDE_DIR=${gflags_catkin_INCLUDE_DIR}
