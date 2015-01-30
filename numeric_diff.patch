@@ -1,0 +1,16 @@
+--- a/include/ceres/internal/numeric_diff.h
++++ b/include/ceres/internal/numeric_diff.h
+@@ -194,6 +194,12 @@ struct NumericDiff<CostFunctor, kMethod, kNumResiduals,
+       const int num_residuals,
+       double **parameters,
+       double *jacobian) {
++    static_cast<void>(functor);
++    static_cast<void>(residuals_at_eval_point);
++    static_cast<void>(relative_step_size);
++    static_cast<void>(num_residuals);
++    static_cast<void>(parameters);
++    static_cast<void>(jacobian);
+     LOG(FATAL) << "Control should never reach here.";
+     return true;
+   }
+
