@@ -8,8 +8,8 @@ include_directories(${Eigen_INCLUDE_DIRS})
 
 include(ExternalProject)
 
-set(VERSION 1.9.0)
-set(CERES_TAG 7c57de5080c9f5a4f067e2d20b5f33bad5b1ade6) #version 1.9
+set(VERSION 1.10.0)
+set(CERES_TAG ba28d3a3db6221a3f87585ca750f46ca5cff3d4f) #version 1.10
 
 # The configure step fails at catkin_package() if this directory
 # doesn't exist yet. Create it at configure time!
