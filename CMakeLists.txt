@@ -9,7 +9,7 @@ include_directories(${Eigen_INCLUDE_DIRS})
 include(ExternalProject)
 
 set(VERSION 1.9.0)
-set(CERES_TAG 7c57de5080c9f5a4f067e2d20b5f33bad5b1ade6) #version 1.9
+set(CERES_TAG 6a13e39e8171f450fbb89188d97f198def81937e) #version 1.11
 
 # The configure step fails at catkin_package() if this directory
 # doesn't exist yet. Create it at configure time!
@@ -26,7 +26,7 @@ ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
   UPDATE_COMMAND ""
-  PATCH_COMMAND cd ../ceres_src/ && patch -N CMakeLists.txt ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.patch && patch ${GOMP_PATCH} -N internal/ceres/CMakeLists.txt ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists_internal.patch && patch -N include/ceres/internal/numeric_diff.h ${CMAKE_CURRENT_SOURCE_DIR}/numeric_diff.patch
+  PATCH_COMMAND cd ../ceres_src/ && git apply ${CMAKE_CURRENT_SOURCE_DIR}/clang_openmp.patch
   CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON 
     -DGFLAGS_LIBRARY=${gflags_catkin_LIBRARIES}
     -DGFLAGS_INCLUDE_DIR=${gflags_catkin_INCLUDE_DIR}
