@@ -26,7 +26,7 @@ ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
   UPDATE_COMMAND ""
-  PATCH_COMMAND cd ../ceres_src/ && git apply ${CMAKE_CURRENT_SOURCE_DIR}/clang_openmp.patch
+  PATCH_COMMAND cd ../ceres_src/ && git apply ${CMAKE_CURRENT_SOURCE_DIR}/clang_openmp.patch && git apply ${CMAKE_CURRENT_SOURCE_DIR}/is_const.patch
   CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON 
     -DGFLAGS_LIBRARY=${gflags_catkin_LIBRARIES}
     -DGFLAGS_INCLUDE_DIR=${gflags_catkin_INCLUDE_DIR}
