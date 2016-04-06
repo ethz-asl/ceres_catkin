@@ -43,7 +43,7 @@ index 8547d5d..1019512 100644
 +               << ". You must add the parameter block to the problem before "
 +               << "it can be queried.";
 +  }
-+  parameter_block->IsConstant();
++  return parameter_block->IsConstant();
 +}
 +
  void ProblemImpl::SetParameterBlockVariable(double* values) {
