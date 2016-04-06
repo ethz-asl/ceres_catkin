@@ -25,7 +25,8 @@ endif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
-  PATCH_COMMAND cd ../ceres_src/ && git apply ${CMAKE_CURRENT_SOURCE_DIR}/clang_openmp.patch && git apply ${CMAKE_CURRENT_SOURCE_DIR}/export_nonpublic.patch
+  UPDATE_COMMAND ""
+  PATCH_COMMAND cd ../ceres_src/ && git apply ${CMAKE_CURRENT_SOURCE_DIR}/clang_openmp.patch && git apply ${CMAKE_CURRENT_SOURCE_DIR}/is_const.patch && git apply ${CMAKE_CURRENT_SOURCE_DIR}/export_nonpublic.patch
   CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON 
     -DGFLAGS_LIBRARY=${gflags_catkin_LIBRARIES}
     -DGFLAGS_INCLUDE_DIR=${gflags_catkin_INCLUDE_DIR}
