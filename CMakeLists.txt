@@ -8,7 +8,7 @@ include_directories(${Eigen_INCLUDE_DIRS})
 
 include(ExternalProject)
 
-set(VERSION 1.9.0)
+set(VERSION 1.11.0)
 set(CERES_TAG 6a13e39e8171f450fbb89188d97f198def81937e) #version 1.11
 
 # The configure step fails at catkin_package() if this directory
@@ -39,7 +39,7 @@ ExternalProject_Add(ceres_src
 	-DCMAKE_BUILD_TYPE:STRING=Release
     -DBUILD_EXAMPLES=OFF
     -DBUILD_TESTING=OFF
-    -DEXPORT_NONPUBLIC_HEADERS=ON
+    -DEXPORT_NONPUBLIC_HEADERS=OFF
   BUILD_COMMAND make -j8
   INSTALL_COMMAND make install -j8
 )

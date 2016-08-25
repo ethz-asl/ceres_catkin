@@ -14,9 +14,9 @@
   <buildtool_depend>catkin_simple</buildtool_depend>
   
   <build_depend>atlas</build_depend>
-  <build_depend>blas</build_depend>
   <build_depend>eigen</build_depend>
-  <build_depend>gfortran</build_depend>
+  <build_depend>libblas-dev</build_depend>
+  <build_depend>liblapack-dev</build_depend>
   <build_depend>gflags_catkin</build_depend>
   <build_depend>glog_catkin</build_depend>
   <build_depend>suitesparse</build_depend>
