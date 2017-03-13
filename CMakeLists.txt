@@ -8,8 +8,8 @@ include_directories(${Eigen_INCLUDE_DIRS})
 
 include(ExternalProject)
 
-set(VERSION 1.11.0)
-set(CERES_TAG 6a13e39e8171f450fbb89188d97f198def81937e) #version 1.11
+set(VERSION 1.12.0)
+set(CERES_TAG 0352a521a654a29257077679c5a7ec9c35f45c7e) #version 1.12
 
 # The configure step fails at catkin_package() if this directory
 # doesn't exist yet. Create it at configure time!
@@ -26,7 +26,6 @@ ExternalProject_Add(ceres_src
   GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
   GIT_TAG ${CERES_TAG}
   UPDATE_COMMAND ""
-  PATCH_COMMAND cd ../ceres_src/ && git apply ${CMAKE_CURRENT_SOURCE_DIR}/clang_openmp.patch && git apply ${CMAKE_CURRENT_SOURCE_DIR}/is_const.patch && git apply ${CMAKE_CURRENT_SOURCE_DIR}/export_nonpublic.patch
   CONFIGURE_COMMAND cmake -DCMAKE_CXX_FLAGS=-fPIC -DGFLAGS=ON 
     -DGFLAGS_LIBRARY=${gflags_catkin_LIBRARIES}
     -DGFLAGS_INCLUDE_DIR=${gflags_catkin_INCLUDE_DIR}
@@ -39,7 +38,6 @@ ExternalProject_Add(ceres_src
 	-DCMAKE_BUILD_TYPE:STRING=Release
     -DBUILD_EXAMPLES=OFF
     -DBUILD_TESTING=OFF
-    -DEXPORT_NONPUBLIC_HEADERS=OFF
   BUILD_COMMAND make -j8
   INSTALL_COMMAND make install -j8
 )
