@@ -5,3 +5,7 @@ dependencies
 ceres_src
 ceres
 docs
+
+# Bloom.
+debian
+obj*
