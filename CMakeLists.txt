@@ -8,8 +8,7 @@ include_directories(${Eigen_INCLUDE_DIRS})
 
 include(ExternalProject)
 
-set(VERSION 1.12.0)
-set(CERES_TAG 0352a521a654a29257077679c5a7ec9c35f45c7e) #version 1.12
+set(VERSION 1.14.0)
 
 # The configure step fails at catkin_package() if this directory
 # doesn't exist yet. Create it at configure time!
@@ -23,8 +22,8 @@ else (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 
 ExternalProject_Add(ceres_src
-  GIT_REPOSITORY https://ceres-solver.googlesource.com/ceres-solver
-  GIT_TAG ${CERES_TAG}
+  GIT_REPOSITORY https://github.com/ceres-solver/ceres-solver.git
+  GIT_TAG ${VERSION}
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cmake
     -DGFLAGS=ON
