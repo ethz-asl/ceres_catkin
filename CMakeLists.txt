@@ -27,10 +27,10 @@ ExternalProject_Add(ceres_src
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cmake
     -DGFLAGS=ON
-    -DGFLAGS_LIBRARY=${gflags_catkin_LIBRARIES}
-    -DGFLAGS_INCLUDE_DIR=${gflags_catkin_INCLUDE_DIRS}
-    -DGLOG_INCLUDE_DIR=${glog_catkin_INCLUDE_DIRS}
-    -DGLOG_LIBRARY=${glog_catkin_LIBRARIES}
+    -DGFLAGS_LIBRARY_DIR_HINTS=${gflags_catkin_LIBRARIES}
+    -DGFLAGS_INCLUDE_DIR_HINTS=${gflags_catkin_INCLUDE_DIR}
+    -DGLOG_INCLUDE_DIR_HINTS=${glog_catkin_INCLUDE_DIR}
+    -DGLOG_LIBRARY_DIR_HINTS=${glog_catkin_LIBRARIES}
     -DBUILD_DOCUMENTATION=OFF
     -DSUITESPARSE_INCLUDE_DIR_HINTS=${suitesparse_PREFIX}/include/suitesparse
     -DSUITESPARSE_LIBRARY_DIR_HINTS=${suitesparse_PREFIX}/lib
