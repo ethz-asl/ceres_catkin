@@ -17,7 +17,10 @@
   <build_depend>eigen</build_depend>
   <build_depend>libblas-dev</build_depend>
   <build_depend>liblapack-dev</build_depend>
-  <build_depend>gflags_catkin</build_depend>
   <build_depend>glog_catkin</build_depend>
   <build_depend>suitesparse</build_depend>
+
+  <run_depend>atlas</run_depend>
+  <run_depend>glog_catkin</run_depend>
+  <run_depend>suitesparse</run_depend>
 </package>
