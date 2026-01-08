@@ -8,7 +8,7 @@ include_directories(${Eigen_INCLUDE_DIRS})
 
 include(ExternalProject)
 
-set(VERSION 1.14.0)
+set(VERSION 2.2.0)
 
 # The configure step fails at catkin_package() if this directory
 # doesn't exist yet. Create it at configure time!
@@ -36,13 +36,18 @@ ExternalProject_Add(ceres_src
     -DSUITESPARSE_LIBRARY_DIR_HINTS=${suitesparse_PREFIX}/lib
     -DBUILD_EXAMPLES=OFF
     -DBUILD_TESTING=OFF
-    -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON
+    -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}
+    -DBUILD_SHARED_LIBS=ON
     -DCMAKE_VERBOSE_MAKEFILE=ON
     -DCMAKE_BUILD_TYPE:STRING=Release
     -DCMAKE_CXX_FLAGS=-fPIC
     -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON
     -DCMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY=ON
+    -DCERES_NO_CUDA=ON
+    -DCMAKE_CUDA_COMPILER=OFF
+    -DUSE_CUDA=OFF
     ../ceres_src
+
   BUILD_COMMAND make -j8
   INSTALL_COMMAND make install -j8
 )
